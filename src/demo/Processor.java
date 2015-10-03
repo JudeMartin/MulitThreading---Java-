@@ -10,20 +10,18 @@ public class Processor implements Runnable {
 	public Processor(int id){
 		this.id	 = id;
 	}
-	
 	public static void main(String[] args) {
-	ExecutorService service = Executors.newFixedThreadPool(2);
-	for (int i = 0; i < 5; i++) {
-		service.submit(new Processor(i));
+		ExecutorService service = Executors.newFixedThreadPool(2);
+		for (int i = 0; i < 5; i++) {
+			service.submit(new Processor(i));
 		}
-	service.shutdown();
-	
-	try {
-		service.awaitTermination(1, TimeUnit.DAYS);
+		service.shutdown();
+		try {
+			service.awaitTermination(1, TimeUnit.DAYS);
 		} 
-	catch (InterruptedException e) {
-		e.printStackTrace();
-		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
@@ -37,6 +35,4 @@ public class Processor implements Runnable {
 		}
 		System.out.println("Completed: "+id);
 	}
-
-	
 }
